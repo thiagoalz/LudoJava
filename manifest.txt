@@ -1,0 +1,3 @@
+Main-Class: ludo.Tabuleiro
+Name: ludo/Tabuleiro.class
+Java-Bean: True
