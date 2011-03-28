@@ -1,27 +1,22 @@
 package ludo;
-import java.util.*;
 import javax.swing.*;
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2004</p>
- * <p>Company: </p>
- * @author not attributable
- * @version 1.0
- */
+import java.util.*;
 
-public abstract class Casa extends JLabel {
-  protected ArrayList ocupantes;
-
-  public Casa(){
+public class Casa extends JLabel implements java.io.Serializable{
+  private boolean coroa;
+  private ArrayList ocupantes;
+  public Casa() {
     super();
+    coroa=false;
     ocupantes=new ArrayList();
     this.setIcon(null);
   }
-
-  abstract ArrayList addPeao(Peao p);
-  abstract Peao tiraPeao(Jogador jog);
-
+  public Casa(boolean coroa) {
+    super();
+    this.coroa=coroa;
+    ocupantes=new ArrayList();
+    this.setIcon(null);
+  }
   public void resetaCasa(){
     ocupantes=new ArrayList();
     this.setIcon(null);
@@ -30,25 +25,46 @@ public abstract class Casa extends JLabel {
   public int getQtdPeoes(){
     return ocupantes.size();
   }
-
-  public boolean temPeaoLivre(String cor,int dado){//para ver se tem algum peao do jogador atual q pode mover!
-    boolean ret=false;
-    Peao p=null;
-    for(int i=0;i<ocupantes.size();i++){
-      p=(Peao)ocupantes.get(i);
-      if(p.getCor().equals(cor)){
-        ret=true;
-        break;
-      }
+  public boolean getCoroa(){
+    return coroa;
+  }
+  public String getCorPeao(){
+    try{
+      Peao aux=(Peao)ocupantes.get(0);
+      return aux.getCor();
+    }catch(IndexOutOfBoundsException e){
     }
-    if(p!=null)
-      if((p.getCasasPercorridas()==0)&&(dado!=6)){//testa se bote tirar da base!
-        ret=false;
-      }
-    return ret;
+    return null;
   }
 
-  protected void trocaIcone(){//atualiza a imagem da quantidade de peoes!!
+  public ArrayList addPeao(Peao p){
+    ArrayList aux=null;
+    if(ocupantes.size()>0){
+      Peao p_aux=(Peao)ocupantes.get(0);
+      if(!p.getCor().equals(p_aux.getCor())){
+        aux = new ArrayList();
+        for(int i=0;i<ocupantes.size();i++){
+          aux.add(ocupantes.get(i));
+        }
+        ocupantes.clear();
+      }
+    }
+    ocupantes.add(p);
+    trocaIcone();
+    return aux;
+  }
+
+  public Peao tiraPeao(){
+    Peao p=(Peao)ocupantes.remove(0);
+    trocaIcone();
+    return p;
+  }
+  public void atualiza(Casa c){
+    this.ocupantes = c.ocupantes;
+    trocaIcone();
+  }
+
+  private void trocaIcone(){
     if(ocupantes.size()==0){
       this.setIcon(null);
     }else{
@@ -120,6 +136,9 @@ public abstract class Casa extends JLabel {
 
     }
   }
-
-
 }
+
+
+
+
+
