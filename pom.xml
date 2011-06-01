@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.thiagoalz.ludo</groupId>
+	<artifactId>ludoGameEngine</artifactId>
+	<name>LudoGameEngine</name>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<description>More than a Hello World</description>
+
+	<prerequisites>
+		<maven>2.0.9</maven>
+	</prerequisites>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License, Version 3.0</name> <!-- TODO LGPL 2.1-->
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<comments>Copyright (c) 2011 Thiago Alvarenga Lechuga</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>thiagoalz</id>
+			<name>Thiago Alvarenga Lechuga</name>
+			<email>thiagoalz@gmail.com</email>
+			<timezone>-3</timezone>
+		</developer>
+		<developer>
+			<id>gutomaia</id>
+			<name>Gustavo Maia Neto</name>
+			<email>guto@guto.net</email>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<version>2.5.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>repository.thiagoalz.net</id>
+			<name>ThiagoAlz.net Repository</name>
+			<url>scpexe://repository.guto.net/home/repogutonet/repository.guto.net/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>repository.guto.net</id>
+			<name>gUTO.nET Repository</name>
+			<url>scpexe://repository.guto.net/home/repogutonet/repository.guto.net/maven2</url>
+		</snapshotRepository>
+		<site>
+			<id>guto.net</id>
+			<name>gUTO.nET Personal Site</name>
+			<url>scpexe://guto.net/home/gutonet/guto.net/projects/hellow_java</url>
+		</site>
+	</distributionManagement>
+	
+	<scm>
+		<connection>scm:git:git://github.com//gutomaia/hellow_java.git</connection>
+		<developerConnection>scm:git:git@github.com:gutomaia/hellow_java.git</developerConnection>
+		<url>http://github.com/gutomaia/hellow_java</url>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-gitexe</artifactId>
+				<version>1.3</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>1.3</version>
+			</extension>
+			<extension>
+				<groupId>org.kathrynhuxtable.maven.wagon</groupId>
+				<artifactId>wagon-gitsite</artifactId>
+				<version>0.2</version>
+			</extension>
+		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>net.thiagoalz.ludo.MainWindow</mainClass>
+					<executable>maven</executable>
+					<!-- optional -->
+					<workingDirectory>/tmp</workingDirectory>
+					<arguments>
+						<argument>-X</argument>
+						<argument>myproject:dist</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus</id>
+			<name>Javascript Maven Plugin</name>
+			<url>http://snapshots.repository.codehaus.org/</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

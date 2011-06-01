@@ -12,7 +12,7 @@ public class LudoBD {
       out.close();
     }catch(Exception e){
       System.out.println(e.toString());
-      System.out.println("Não foi possivel gravar!");
+      System.out.println("NÃ£o foi possivel gravar!");
     }
   }
   public ArrayList recuperar(File file){
