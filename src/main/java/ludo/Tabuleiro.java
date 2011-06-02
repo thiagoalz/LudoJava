@@ -1,18 +1,45 @@
 package ludo;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+//import java.io.*;
 import java.util.*;
-import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+//import java.applet.*;
 
-/**  setToltipText-> para aparecer quando dexa o mouse parado em cima!!
-  * soh a interface mapeada
-  * array de labels-> livro pg 614 adicionar actionlistener em tds,
-  * tb ver botando action listener soh na ksa q tem peao da cor do jogador;
+/**
+ * <p>Tulo: Jogo de Ludo</p>
+ * <p>Copyright: Thiago Lechuga Copyright (c) 2004</p >
+ * <p>Company: Paulista¥s company</p>
+ * @version 1.0
+ */
+
+ 
+/**
+* This code was generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* *************************************
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED
+* for this machine, so Jigloo or this code cannot be used legally
+* for any corporate or commercial purpose.
+* *************************************
+*/
+/**
+  * setToltipText-> para aparecer quando dexa o mouse parado em cima!!
  */
 
 public class Tabuleiro extends JFrame{
-  // objetos de mouselistener
+  //tipos de cursor!
+  Cursor hand=new Cursor(Cursor.HAND_CURSOR);
+  Cursor seta=new Cursor(Cursor.DEFAULT_CURSOR);
+  //sons
+  //TocaSons tocaSoms=new TocaSons();
+  //os 2 objetos de Mouse listener!
   MouseListener actFocus=new java.awt.event.MouseAdapter() {
     public void mouseEntered(MouseEvent e) {
       casa_mouseEntered(e);
@@ -22,27 +49,35 @@ public class Tabuleiro extends JFrame{
       casa_mouseExited(e);
     }
   };
+
   MouseListener actClick=new java.awt.event.MouseAdapter() {
     public void mouseClicked(MouseEvent e) {
       casa_mouseClicked(e);
     }
   };
-  //cursores
-  Cursor hand= new Cursor(Cursor.HAND_CURSOR);
-  Cursor seta= new Cursor(Cursor.DEFAULT_CURSOR);
-  //Design
+
   Casa[] vetCasas=new Casa[88];
-  Ludo jogo;
+  Jogo jogo;
   JLabel jLabelTabuleiro = new JLabel();
-  JFrame formLudo=new JFrame();
+  JFrame formLudo=new JFrame("Novo Jogo");
+  //JFrame regras=new JFrame("Regras");
+  //JFrame creditos=new JFrame("Creditos");
+  JRadioButton jRadioButtonPcVermelho = new JRadioButton();
   JCheckBox jCheckBoxAzul = new JCheckBox();
   JCheckBox jCheckBoxRosa = new JCheckBox();
+  JRadioButton jRadioButtonPcVerde = new JRadioButton();
   JLabel jLabelquant = new JLabel();
   JButton jButtonOk = new JButton();
+  JRadioButton jRadioButtonJogVermelho = new JRadioButton();
   JTextField jTextFieldVermelho = new JTextField();
+  JRadioButton jRadioButtonPcAzul = new JRadioButton();
+  JRadioButton jRadioButtonPcRosa = new JRadioButton();
   JComboBox jComboBoxQuant = new JComboBox();
   JButton jButtonCancelar = new JButton();
   JTextField jTextFieldVerde = new JTextField();
+  JRadioButton jRadioButtonJogRosa = new JRadioButton();
+  JRadioButton jRadioButtonJogAzul = new JRadioButton();
+  JRadioButton jRadioButtonJogVerde = new JRadioButton();
   JCheckBox jCheckBoxVermelho = new JCheckBox();
   JTextField jTextFieldAzul = new JTextField();
   JCheckBox jCheckBoxVerde = new JCheckBox();
@@ -51,105 +86,110 @@ public class Tabuleiro extends JFrame{
   ButtonGroup buttonGroupVerde = new ButtonGroup();
   ButtonGroup buttonGroupVermelho = new ButtonGroup();
   ButtonGroup buttonGroupRosa = new ButtonGroup();
-  //Chooser
-  JFileChooser chooser = new JFileChooser("Z:/");
-  LudoFileFilter filter = new LudoFileFilter(new String("lud"), "Ludo Games");
-  //Casas
-  Casa casa1 = new Casa();
-  Casa casa2 = new Casa(true);
-  Casa casa3 = new Casa();
-  Casa casa4 = new Casa();
-  Casa casa5 = new Casa(true);
-  Casa casa6 = new Casa();
-  Casa casa7 = new Casa();
-  Casa casa8 = new Casa(true);
-  Casa casa9 = new Casa();
-  Casa casa10 = new Casa();
-  Casa casa11 = new Casa(true);
-  Casa casa12 = new Casa();
-  Casa casa13 = new Casa();
-  Casa casa14 = new Casa(true);
-  Casa casa15 = new Casa();
-  Casa casa16 = new Casa();
-  Casa casa17 = new Casa(true);
-  Casa casa18 = new Casa();
-  Casa casa19 = new Casa();
-  Casa casa20 = new Casa(true);
-  Casa casa21 = new Casa();
-  Casa casa22 = new Casa();
-  Casa casa23 = new Casa(true);
-  Casa casa24 = new Casa();
-  Casa casa25 = new Casa();
-  Casa casa26 = new Casa(true);
-  Casa casa27 = new Casa();
-  Casa casa28 = new Casa();
-  Casa casa29 = new Casa(true);
-  Casa casa30 = new Casa();
-  Casa casa31 = new Casa();
-  Casa casa32 = new Casa(true);
-  Casa casa33 = new Casa();
-  Casa casa34 = new Casa();
-  Casa casa35 = new Casa(true);
-  Casa casa36 = new Casa();
-  Casa casa37 = new Casa();
-  Casa casa38 = new Casa(true);
-  Casa casa39 = new Casa();
-  Casa casa40 = new Casa();
-  Casa casa41 = new Casa(true);
-  Casa casa42 = new Casa();
-  Casa casa43 = new Casa();
-  Casa casa44 = new Casa(true);
-  Casa casa45 = new Casa();
-  Casa casa46 = new Casa();
-  Casa casa47 = new Casa(true);
-  Casa casa0 = new Casa();
-  Casa baseVerm2 = new Casa();
-  Casa baseVerm1 = new Casa();
-  Casa baseVerm3 = new Casa();
-  Casa baseVerm4 = new Casa();
-  Casa baseRosa1 = new Casa();
-  Casa baseRosa4 = new Casa();
-  Casa baseRosa3 = new Casa();
-  Casa baseRosa2 = new Casa();
-  Casa baseVerde2 = new Casa();
-  Casa baseVerde4 = new Casa();
-  Casa baseVerde1 = new Casa();
-  Casa baseVerde3 = new Casa();
-  Casa baseAzul3 = new Casa();
-  Casa baseAzul2 = new Casa();
-  Casa baseAzul1 = new Casa();
-  Casa baseAzul4 = new Casa();
-  Casa cRosa2 = new Casa();
-  Casa cRosa3 = new Casa();
-  Casa cRosa4 = new Casa();
-  Casa cRosa5 = new Casa();
-  Casa cRosa6 = new Casa();
-  Casa cAzul2 = new Casa();
-  Casa cAzul3 = new Casa();
-  Casa cAzul4 = new Casa();
-  Casa cAzul5 = new Casa();
-  Casa cAzul6 = new Casa();
-  Casa cVerde2 = new Casa();
-  Casa cVerde3 = new Casa();
-  Casa cVerde4 = new Casa();
-  Casa cVerde5 = new Casa();
-  Casa cVerde6 = new Casa();
-  Casa cVerm2 = new Casa();
-  Casa cVerm3 = new Casa();
-  Casa cVerm4 = new Casa();
-  Casa cVerm5 = new Casa();
-  Casa cVerm6 = new Casa();
+  Casa casa0 = new CasaSimples();
+  Casa casa1 = new CasaSimples();
+  Casa casa2 = new CasaCoroa();
+  Casa casa3 = new CasaSimples();
+  Casa casa4 = new CasaSimples();
+  Casa casa5 = new CasaCoroa();
+  Casa casa6 = new CasaSimples();
+  Casa casa7 = new CasaSimples();
+  Casa casa8 = new CasaCoroa();
+  Casa casa9 = new CasaSimples();
+  Casa casa10 = new CasaSimples();
+  Casa casa11 = new CasaCoroa();
+  Casa casa12 = new CasaSimples();
+  Casa casa13 = new CasaSimples();
+  Casa casa14 = new CasaCoroa();
+  Casa casa15 = new CasaSimples();
+  Casa casa16 = new CasaSimples();
+  Casa casa17 = new CasaCoroa();
+  Casa casa18 = new CasaSimples();
+  Casa casa19 = new CasaSimples();
+  Casa casa20 = new CasaCoroa();
+  Casa casa21 = new CasaSimples();
+  Casa casa22 = new CasaSimples();
+  Casa casa23 = new CasaCoroa();
+  Casa casa24 = new CasaSimples();
+  Casa casa25 = new CasaSimples();
+  Casa casa26 = new CasaCoroa();
+  Casa casa27 = new CasaSimples();
+  Casa casa28 = new CasaSimples();
+  Casa casa29 = new CasaCoroa();
+  Casa casa30 = new CasaSimples();
+  Casa casa31 = new CasaSimples();
+  Casa casa32 = new CasaCoroa();
+  Casa casa33 = new CasaSimples();
+  Casa casa34 = new CasaSimples();
+  Casa casa35 = new CasaCoroa();
+  Casa casa36 = new CasaSimples();
+  Casa casa37 = new CasaSimples();
+  Casa casa38 = new CasaCoroa();
+  Casa casa39 = new CasaSimples();
+  Casa casa40 = new CasaSimples();
+  Casa casa41 = new CasaCoroa();
+  Casa casa42 = new CasaSimples();
+  Casa casa43 = new CasaSimples();
+  Casa casa44 = new CasaCoroa();
+  Casa casa45 = new CasaSimples();
+  Casa casa46 = new CasaSimples();
+  Casa casa47 = new CasaCoroa();
+  Casa baseVerm2 = new CasaSimples();
+  Casa baseVerm1 = new CasaSimples();
+  Casa baseVerm3 = new CasaSimples();
+  Casa baseVerm4 = new CasaSimples();
+  Casa baseRosa1 = new CasaSimples();
+  Casa baseRosa4 = new CasaSimples();
+  Casa baseRosa3 = new CasaSimples();
+  Casa baseRosa2 = new CasaSimples();
+  Casa baseVerde2 = new CasaSimples();
+  Casa baseVerde4 = new CasaSimples();
+  Casa baseVerde1 = new CasaSimples();
+  Casa baseVerde3 = new CasaSimples();
+  Casa baseAzul3 = new CasaSimples();
+  Casa baseAzul2 = new CasaSimples();
+  Casa baseAzul1 = new CasaSimples();
+  Casa baseAzul4 = new CasaSimples();
+  Casa cRosa2 = new CasaSimples();
+  Casa cRosa3 = new CasaSimples();
+  Casa cRosa4 = new CasaSimples();
+  Casa cRosa5 = new CasaSimples();
+  Casa cRosa6 = new CasaSimples();
+  Casa cAzul2 = new CasaSimples();
+  Casa cAzul3 = new CasaSimples();
+  Casa cAzul4 = new CasaSimples();
+  Casa cAzul5 = new CasaSimples();
+  Casa cAzul6 = new CasaSimples();
+  Casa cVerde2 = new CasaSimples();
+  Casa cVerde3 = new CasaSimples();
+  Casa cVerde4 = new CasaSimples();
+  Casa cVerde5 = new CasaSimples();
+  Casa cVerde6 = new CasaSimples();
+  Casa cVerm2 = new CasaSimples();
+  Casa cVerm3 = new CasaSimples();
+  Casa cVerm4 = new CasaSimples();
+  Casa cVerm5 = new CasaSimples();
+  Casa cVerm6 = new CasaSimples();
   JLabel jLabelVez = new JLabel();
   JTextField jTextFieldJogador = new JTextField();
   JButton jButtonJogar = new JButton();
-  private JButton jButtonPassar = new JButton();
-  JLabel jLabeldado = new JLabel();
-  JLabel jLabel1 = new JLabel();
+  JLabel jLabelDado = new JLabel();
+  JScrollPane jScrollPane1 = new JScrollPane();
+  TitledBorder titledBorder1;
+  JTextPane jTextPaneHistorico = new JTextPane();
+  JButton jButtonHistorico = new JButton();
+  Border border1;
+  TitledBorder titledBorder2;
+  Border border2;
+  TitledBorder titledBorder3;
+  Border border3;
+  TitledBorder titledBorder4;
+  //TitledBorder titledBorder1;
   public Tabuleiro() {
-    super("Ludo Java 1.0<<<<<<Por Thygo e John>>>>>>>>");
-    formLudo.setSize(420,250);
+    super("Ludo Java 1.0");
+    formLudo.setSize(500,250);
     formLudo.setVisible(false);
-    chooser.addChoosableFileFilter(filter);
+    //construÁao da barra de menu!
     JMenuBar bar=new JMenuBar();
     setJMenuBar(bar);
     JMenu menuJogo=new JMenu("Jogo");
@@ -163,62 +203,10 @@ public class Tabuleiro extends JFrame{
         }
       }
     );
-    JMenuItem gravarItem=new JMenuItem("Salvar");
-    gravarItem.setMnemonic('s');
-    gravarItem.addActionListener(
-      new ActionListener(){
-        public void actionPerformed(ActionEvent e){
-          if(jButtonJogar.isEnabled()==true){
-            int returnVal = chooser.showSaveDialog(null);
-            if(returnVal == JFileChooser.APPROVE_OPTION){
-              File file = chooser.getSelectedFile();
-              String nomeArq= file.getName();
-              if (nomeArq.equals(null) == false) {
-                jogo.salvar(vetCasas, nomeArq);
-              }
-              System.out.println("Saving: " + file.getName() + ".");
-            } else {
-              System.out.println("Save command cancelled by user.");
-            }
-          } else {
-            JOptionPane.showMessageDialog(null, "N√£o √© poss√≠vel gravar o jogo neste momento.");
-          }
-        }
-      }
-    );
-    JMenuItem abrirItem=new JMenuItem("Abrir");
-    abrirItem.setMnemonic('a');
-    abrirItem.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent e){
-        int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-          File file = chooser.getSelectedFile();
-          jogo = new Ludo();
-          ArrayList array = jogo.recuperar(vetCasas.length, file);
-          if(array!=null){
-            for (int i = 0; i < vetCasas.length; i++) {
-              vetCasas[i].resetaCasa();
-            }
-            JOptionPane.showMessageDialog(null, "Opera√ß√£o realizada com sucesso");
-            for (int i = 0; i <vetCasas.length; i++) {
-              Casa c = (Casa)array.get(i);
-              vetCasas[i].atualiza(c);
-            }
-            alteraTextFieldJogador(jogo.getJogadorAtual());
-            jButtonJogar.setEnabled(true);
-          }
-          System.out.println("Opening: " + file.getName() + ".");
-        } else {
-          System.out.println("Open command cancelled by user.");
-        }
-      }
-    });
     menuJogo.add(novoJogoItem);
-    menuJogo.add(gravarItem);
-    menuJogo.add(abrirItem);
     menuJogo.addSeparator();
     JMenuItem sairItem=new JMenuItem("Sair");
-    sairItem.setMnemonic('i');
+    sairItem.setMnemonic('s');
     sairItem.addActionListener(
       new ActionListener(){
         public void actionPerformed(ActionEvent e){
@@ -228,6 +216,30 @@ public class Tabuleiro extends JFrame{
     );
     menuJogo.add(sairItem);
     bar.add(menuJogo);
+  /*JMenu menuHelp=new JMenu("Help");
+    menuJogo.setMnemonic('h');
+    JMenuItem regrasItem=new JMenuItem("Regras");
+    regrasItem.setMnemonic('r');
+    regrasItem.addActionListener(
+      new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+          regras.show();
+        }
+      }
+    );
+    menuHelp.add(regrasItem);
+    menuHelp.addSeparator();
+    JMenuItem creditosItem=new JMenuItem("Creditos");
+    creditosItem.setMnemonic('c');
+    creditosItem.addActionListener(
+      new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+          creditos.show();
+        }
+      }
+    );
+    menuHelp.add(creditosItem);
+    bar.add(menuHelp);*/
     try {
       jbInit();
     }
@@ -238,7 +250,6 @@ public class Tabuleiro extends JFrame{
 
   public static void main(String[] args) {
     Tabuleiro tab=new Tabuleiro();
-
     tab.addWindowListener(
       new WindowAdapter() {
         public void windowClosing(WindowEvent e) {
@@ -247,49 +258,92 @@ public class Tabuleiro extends JFrame{
       }
     );
 
-    tab.setSize(550,490);
+    tab.setSize(850,490);
     tab.show();
+    tab.setSize(555,490);
   }
   private void jbInit() throws Exception {
-    jLabelTabuleiro.setIcon(new ImageIcon(Tabuleiro.class.getResource("tabuleiro.jpg")));
+    titledBorder1 = new TitledBorder("");
+    border1 = BorderFactory.createLineBorder(Color.black,2);
+    titledBorder2 = new TitledBorder(border1,"Historico");
+    border2 = BorderFactory.createLineBorder(Color.black,2);
+    titledBorder3 = new TitledBorder(border2,"Historico");
+    border3 = BorderFactory.createLineBorder(new Color(127, 157, 185),2);
+    titledBorder4 = new TitledBorder(BorderFactory.createLineBorder(Color.black,2),"Historico");
+    jButtonJogar.setToolTipText("Clique Para Rolar o Dado");
+    jLabelTabuleiro.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/tabuleiro.png")));
+    //jLabelTabuleiro.setDisabledIcon(new ImageIcon(Interface.class.getResource("ludo.JPG")));
     jLabelTabuleiro.setBounds(new Rectangle(107, 2, 432, 441));
     this.getContentPane().setLayout(null);
     formLudo.getContentPane().setLayout(null);
-    jCheckBoxAzul.setBackground(Color.white);
+    jRadioButtonPcVermelho.setBounds(new Rectangle(313, 95, 53, 20));
+    jRadioButtonPcVermelho.setBackground(new Color(241, 234, 64));
+    jRadioButtonPcVermelho.setText("PC");
+    jRadioButtonPcVermelho.setSelected(true);
+    jCheckBoxAzul.setBackground(new Color(241, 234, 64));
     jCheckBoxAzul.setText("Azul");
     jCheckBoxAzul.setBounds(new Rectangle(5, 37, 88, 17));
     jCheckBoxRosa.setBounds(new Rectangle(5, 129, 88, 17));
-    jCheckBoxRosa.setBackground(Color.white);
+    jCheckBoxRosa.setBackground(new Color(241, 234, 64));
     jCheckBoxRosa.setSelectedIcon(null);
     jCheckBoxRosa.setText("Rosa");
-    jLabelquant.setText("Qnt pecas");
-    jLabelquant.setBounds(new Rectangle(248, 39, 71, 17));
-    jButtonOk.setBounds(new Rectangle(257, 116, 85, 26));
+    jRadioButtonPcVerde.setBounds(new Rectangle(313, 64, 53, 20));
+    jRadioButtonPcVerde.setBackground(new Color(241, 234, 64));
+    jRadioButtonPcVerde.setText("PC");
+    jRadioButtonPcVerde.setSelected(true);
+    jLabelquant.setText("Qant pecas");
+    jLabelquant.setBounds(new Rectangle(391, 39, 71, 17));
+    jButtonOk.setBounds(new Rectangle(269, 168, 85, 26));
     jButtonOk.setText("Ok");
     jButtonOk.addActionListener(new Tabuleiro_jButtonOk_actionAdapter(this));
+    jButtonHistorico.addActionListener(new Tabuleiro_jButtonHistorico_actionAdapter(this));
+    jRadioButtonJogVermelho.setBounds(new Rectangle(234, 95, 79, 21));
+    jRadioButtonJogVermelho.setText("Jogador");
+    jRadioButtonJogVermelho.setBackground(new Color(241, 234, 64));
+    jRadioButtonJogVermelho.setSelected(false);
     jTextFieldVermelho.setBounds(new Rectangle(109, 95, 110, 20));
     jTextFieldVermelho.setText("Vermelho");
-    jComboBoxQuant.setBackground(Color.white);
+    jRadioButtonPcAzul.setBackground(new Color(241, 234, 64));
+    jRadioButtonPcAzul.setText("PC");
+    jRadioButtonPcAzul.setBounds(new Rectangle(313, 35, 53, 20));
+    jRadioButtonPcAzul.setSelected(true);
+    jRadioButtonPcRosa.setBounds(new Rectangle(313, 127, 53, 20));
+    jRadioButtonPcRosa.setBackground(new Color(241, 234, 64));
+    jRadioButtonPcRosa.setText("PC");
+    jRadioButtonPcRosa.setSelected(true);
+    jComboBoxQuant.setBackground(new Color(241, 234, 64));
     jComboBoxQuant.setBorder(BorderFactory.createLineBorder(Color.black));
-    jComboBoxQuant.setBounds(new Rectangle(259, 67, 46, 21));
+    jComboBoxQuant.setBounds(new Rectangle(402, 67, 46, 21));
     jButtonCancelar.setText("Cancelar");
     jButtonCancelar.addActionListener(new Tabuleiro_jButtonCancelar_actionAdapter(this));
-    jButtonCancelar.setBounds(new Rectangle(257, 145, 85, 26));
+    jButtonCancelar.setBounds(new Rectangle(363, 167, 85, 26));
     jTextFieldVerde.setBounds(new Rectangle(109, 64, 110, 20));
     jTextFieldVerde.setText("Verde");
+    jRadioButtonJogRosa.setBounds(new Rectangle(234, 127, 79, 21));
+    jRadioButtonJogRosa.setText("Jogador");
+    jRadioButtonJogRosa.setBackground(new Color(241, 234, 64));
+    jRadioButtonJogRosa.setSelected(false);
+    jRadioButtonJogAzul.setBackground(new Color(241, 234, 64));
+    jRadioButtonJogAzul.setSelected(false);
+    jRadioButtonJogAzul.setText("Jogador");
+    jRadioButtonJogAzul.setBounds(new Rectangle(234, 35, 79, 21));
+    jRadioButtonJogVerde.setBounds(new Rectangle(234, 64, 79, 21));
+    jRadioButtonJogVerde.setText("Jogador");
+    jRadioButtonJogVerde.setBackground(new Color(241, 234, 64));
+    jRadioButtonJogVerde.setSelected(false);
     jCheckBoxVermelho.setBounds(new Rectangle(5, 97, 88, 17));
-    jCheckBoxVermelho.setBackground(Color.white);
+    jCheckBoxVermelho.setBackground(new Color(241, 234, 64));
     jCheckBoxVermelho.setRolloverEnabled(true);
     jCheckBoxVermelho.setSelected(false);
     jCheckBoxVermelho.setText("Vermelho");
     jTextFieldAzul.setText("Azul");
     jTextFieldAzul.setBounds(new Rectangle(109, 35, 110, 20));
     jCheckBoxVerde.setBounds(new Rectangle(5, 66, 88, 17));
-    jCheckBoxVerde.setBackground(Color.white);
+    jCheckBoxVerde.setBackground(new Color(241, 234, 64));
     jCheckBoxVerde.setText("Verde");
     jTextFieldRosa.setBounds(new Rectangle(109, 127, 110, 20));
     jTextFieldRosa.setText("Rosa");
-    formLudo.getContentPane().setBackground(Color.white);
+    formLudo.getContentPane().setBackground(new Color(241, 234, 64));
     this.getContentPane().setBackground(new Color(0, 128, 128));
     casa1.setText("");
     casa1.setBounds(new Rectangle(120, 173, 29, 29));
@@ -465,49 +519,77 @@ public class Tabuleiro extends JFrame{
     jLabelVez.setBounds(new Rectangle(17, 28, 101, 19));
     jTextFieldJogador.setEnabled(false);
     jTextFieldJogador.setFont(new java.awt.Font("Dialog", 1, 11));
-    jTextFieldJogador.setDisabledTextColor(Color.black);
+    jTextFieldJogador.setDisabledTextColor(Color.white);
     jTextFieldJogador.setEditable(false);
-    jTextFieldJogador.setText("Jogo N√£o Iniciado");
+    jTextFieldJogador.setText("  Jogo N„o Iniciado");
     jTextFieldJogador.setBounds(new Rectangle(8, 52, 117, 19));
-    jButtonJogar.setBackground(Color.lightGray);
-    jButtonJogar.setBounds(new Rectangle(21, 245, 73, 23));
+    jButtonJogar.setBackground(new Color(0, 128, 128));
+    jButtonJogar.setBounds(new Rectangle(37, 183, 47, 58));
     jButtonJogar.setEnabled(false);
-    jButtonJogar.setBorder(BorderFactory.createEtchedBorder());
+    jButtonJogar.setBorder(BorderFactory.createRaisedBevelBorder());
     jButtonJogar.setActionCommand("jButton1");
+    jButtonJogar.setContentAreaFilled(false);
+    jButtonJogar.setIcon(null);
     jButtonJogar.setText("Jogar!");
     jButtonJogar.addActionListener(new Tabuleiro_jButtonJogar_actionAdapter(this));
-    jButtonPassar.setText("Passar...");
-    jButtonPassar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        jButtonPassar_actionPerformed(e);
-      }
-    });
-    jButtonPassar.setActionCommand("jButton1");
-    jButtonPassar.setBorder(BorderFactory.createEtchedBorder());
-    jButtonPassar.setEnabled(false);
-    jButtonPassar.setBounds(new Rectangle(21, 273, 74, 23));
-    jButtonPassar.setBackground(Color.lightGray);
-    jLabel1.setText("");
-    jLabel1.setBounds(new Rectangle(16, 156, 82, 77));
-    jLabel1.setText("");
-    jLabel1.setBounds(new Rectangle(27, 158, 60, 71));
-    chooser.setAcceptAllFileFilterUsed(false);
+    jLabelDado.setToolTipText("Clique em um peao para andar!");
+    jLabelDado.setText("");
+    jLabelDado.setBounds(new Rectangle(38, 183, 46, 59));
+    jLabelDado.addMouseListener(new Tabuleiro_jLabelDado_mouseAdapter(this));
+    jScrollPane1.getViewport().setBackground(UIManager.getColor("TabbedPane.foreground"));
+    jScrollPane1.setBorder(titledBorder4);
+    jScrollPane1.setBounds(new Rectangle(548, 19, 281, 407));
+    jTextPaneHistorico.setBackground(new Color(0, 128, 128));
+    jTextPaneHistorico.setForeground(Color.black);
+    jTextPaneHistorico.setBorder(null);
+    jTextPaneHistorico.setCaretColor(Color.black);
+    jTextPaneHistorico.setEditable(false);
+    jTextPaneHistorico.setSelectionColor(Color.lightGray);
+    jTextPaneHistorico.setText("Jogo Nao Iniciado!!");
+    jButtonHistorico.setBounds(new Rectangle(418, 362, 116, 41));
+    jButtonHistorico.setBackground(new Color(0, 128, 128));
+    jButtonHistorico.setBounds(new Rectangle(12, 275, 101, 32));
+    jButtonHistorico.setBorder(BorderFactory.createRaisedBevelBorder());
+    jButtonHistorico.setOpaque(false);
+    jButtonHistorico.setBorderPainted(true);
+    jButtonHistorico.setContentAreaFilled(false);
+    jButtonHistorico.setSelected(false);
+    jButtonHistorico.setText("Mostrar Log");
+    formLudo.getContentPane().add(jRadioButtonPcVermelho, null);
     formLudo.getContentPane().add(jCheckBoxAzul, null);
     formLudo.getContentPane().add(jCheckBoxRosa, null);
+    formLudo.getContentPane().add(jRadioButtonPcVerde, null);
+    formLudo.getContentPane().add(jLabelquant, null);
+    formLudo.getContentPane().add(jButtonOk, null);
+    formLudo.getContentPane().add(jRadioButtonJogVermelho, null);
     formLudo.getContentPane().add(jTextFieldVermelho, null);
+    formLudo.getContentPane().add(jRadioButtonPcAzul, null);
+    formLudo.getContentPane().add(jRadioButtonPcRosa, null);
+    formLudo.getContentPane().add(jComboBoxQuant, null);
+    formLudo.getContentPane().add(jButtonCancelar, null);
     formLudo.getContentPane().add(jTextFieldVerde, null);
+    formLudo.getContentPane().add(jRadioButtonJogRosa, null);
+    formLudo.getContentPane().add(jRadioButtonJogAzul, null);
+    formLudo.getContentPane().add(jRadioButtonJogVerde, null);
     formLudo.getContentPane().add(jCheckBoxVermelho, null);
     formLudo.getContentPane().add(jTextFieldAzul, null);
     formLudo.getContentPane().add(jCheckBoxVerde, null);
     formLudo.getContentPane().add(jTextFieldRosa, null);
-    formLudo.getContentPane().add(jLabelquant, null);
-    formLudo.getContentPane().add(jComboBoxQuant, null);
-    formLudo.getContentPane().add(jButtonOk, null);
-    formLudo.getContentPane().add(jButtonCancelar, null);
     jComboBoxQuant.addItem("4");
     jComboBoxQuant.addItem("3");
     jComboBoxQuant.addItem("2");
     jComboBoxQuant.addItem("1");
+    buttonGroupAzul.add(jRadioButtonJogAzul);
+    buttonGroupAzul.add(jRadioButtonPcAzul);
+    buttonGroupVerde.add(jRadioButtonJogVerde);
+    buttonGroupVerde.add(jRadioButtonPcVerde);
+    buttonGroupVermelho.add(jRadioButtonJogVermelho);
+    buttonGroupVermelho.add(jRadioButtonPcVermelho);
+    buttonGroupRosa.add(jRadioButtonJogRosa);
+    buttonGroupRosa.add(jRadioButtonPcRosa);
+    //casas comuns
+    this.getContentPane().add(casa0, null);
+    vetCasas[0]=casa0;
     this.getContentPane().add(casa1, null);
     vetCasas[1]=casa1;
     this.getContentPane().add(casa2, null);
@@ -602,8 +684,8 @@ public class Tabuleiro extends JFrame{
     vetCasas[46]=casa46;
     this.getContentPane().add(casa47, null);
     vetCasas[47]=casa47;
-    this.getContentPane().add(casa0, null);
-    vetCasas[0]=casa0;
+
+  //Casas da Base
     this.getContentPane().add(baseVerm2, null);
     vetCasas[48]=baseVerm2;
     this.getContentPane().add(baseVerm1, null);
@@ -612,6 +694,7 @@ public class Tabuleiro extends JFrame{
     vetCasas[50]=baseVerm3;
     this.getContentPane().add(baseVerm4, null);
     vetCasas[51]=baseVerm4;
+
     this.getContentPane().add(baseRosa4, null);
     vetCasas[52]=baseRosa4;
     this.getContentPane().add(baseRosa1, null);
@@ -620,6 +703,7 @@ public class Tabuleiro extends JFrame{
     vetCasas[54]=baseRosa3;
     this.getContentPane().add(baseRosa2, null);
     vetCasas[55]=baseRosa2;
+
     this.getContentPane().add(baseVerde2, null);
     vetCasas[56]=baseVerde2;
     this.getContentPane().add(baseVerde4, null);
@@ -628,6 +712,7 @@ public class Tabuleiro extends JFrame{
     vetCasas[58]=baseVerde1;
     this.getContentPane().add(baseVerde3, null);
     vetCasas[59]=baseVerde3;
+
     this.getContentPane().add(baseAzul4, null);
     vetCasas[60]=baseAzul4;
     this.getContentPane().add(baseAzul3, null);
@@ -636,7 +721,8 @@ public class Tabuleiro extends JFrame{
     vetCasas[62]=baseAzul2;
     this.getContentPane().add(baseAzul1, null);
     vetCasas[63]=baseAzul1;
-    //casas coloridas
+
+  //casas coloridas
     vetCasas[64]=casa38;
     this.getContentPane().add(cRosa2, null);
     vetCasas[65]=cRosa2;
@@ -677,6 +763,7 @@ public class Tabuleiro extends JFrame{
     this.getContentPane().add(cVerm5, null);
     vetCasas[83]=cVerm5;
 
+    //Ultima casa!
     this.getContentPane().add(cRosa6, null);
     vetCasas[84]=cRosa6;
     this.getContentPane().add(cAzul6, null);
@@ -688,106 +775,49 @@ public class Tabuleiro extends JFrame{
 
     this.getContentPane().add(jLabelVez, null);
     this.getContentPane().add(jTextFieldJogador, null);
-    this.getContentPane().add(jLabelTabuleiro, null);
-    this.getContentPane().add(jButtonPassar, null);
     this.getContentPane().add(jButtonJogar, null);
-    this.getContentPane().add(jLabel1, null);
-    this.getContentPane().add(jLabel1, null);
+    this.getContentPane().add(jLabelDado, null);
+    this.getContentPane().add(jScrollPane1, null);
+    jScrollPane1.getViewport().add(jTextPaneHistorico, null);
+    this.getContentPane().add(jButtonHistorico, null);
+    this.getContentPane().add(jLabelTabuleiro, null);
+
+    jRadioButtonJogAzul.setSelected(true);
+    jRadioButtonJogVerde.setSelected(true);
+    jRadioButtonJogVermelho.setSelected(true);
+    jRadioButtonJogRosa.setSelected(true);
+     this.setSize(new Dimension(721, 490));
+     jScrollPane1.setVisible(false);
   }
 
-  void relacionaCasas(){
-    vetCasas[1]=casa1;
-    vetCasas[2]=casa2;
-    vetCasas[3]=casa3;
-    vetCasas[4]=casa4;
-    vetCasas[5]=casa5;
-    vetCasas[6]=casa6;
-    vetCasas[7]=casa7;
-    vetCasas[8]=casa8;
-    vetCasas[9]=casa9;
-    vetCasas[10]=casa10;
-    vetCasas[11]=casa11;
-    vetCasas[12]=casa12;
-    vetCasas[13]=casa13;
-    vetCasas[14]=casa14;
-    vetCasas[15]=casa15;
-    vetCasas[16]=casa16;
-    vetCasas[17]=casa17;
-    vetCasas[18]=casa18;
-    vetCasas[19]=casa19;
-    vetCasas[20]=casa20;
-    vetCasas[21]=casa21;
-    vetCasas[22]=casa22;
-    vetCasas[23]=casa23;
-    vetCasas[24]=casa24;
-    vetCasas[25]=casa25;
-    vetCasas[26]=casa26;
-    vetCasas[27]=casa27;
-    vetCasas[28]=casa28;
-    vetCasas[29]=casa29;
-    vetCasas[30]=casa30;
-    vetCasas[31]=casa31;
-    vetCasas[32]=casa32;
-    vetCasas[33]=casa33;
-    vetCasas[34]=casa34;
-    vetCasas[35]=casa35;
-    vetCasas[36]=casa36;
-    vetCasas[37]=casa37;
-    vetCasas[38]=casa38;
-    vetCasas[39]=casa39;
-    vetCasas[40]=casa40;
-    vetCasas[41]=casa41;
-    vetCasas[42]=casa42;
-    vetCasas[43]=casa43;
-    vetCasas[44]=casa44;
-    vetCasas[45]=casa45;
-    vetCasas[46]=casa46;
-    vetCasas[47]=casa47;
-    vetCasas[0]=casa0;
-    vetCasas[48]=baseVerm2;
-    vetCasas[49]=baseVerm1;
-    vetCasas[50]=baseVerm3;
-    vetCasas[51]=baseVerm4;
-    vetCasas[52]=baseRosa4;
-    vetCasas[53]=baseRosa1;
-    vetCasas[54]=baseRosa3;
-    vetCasas[55]=baseRosa2;
-    vetCasas[56]=baseVerde2;
-    vetCasas[57]=baseVerde4;
-    vetCasas[58]=baseVerde1;
-    vetCasas[59]=baseVerde3;
-    vetCasas[60]=baseAzul4;
-    vetCasas[61]=baseAzul3;
-    vetCasas[62]=baseAzul2;
-    vetCasas[63]=baseAzul1;
-    //casas coloridas
-    vetCasas[64]=casa38;
-    vetCasas[65]=cRosa2;
-    vetCasas[66]=cRosa3;
-    vetCasas[67]=cRosa4;
-    vetCasas[68]=cRosa5;
-    vetCasas[69]=casa26;
-    vetCasas[70]=cAzul2;
-    vetCasas[71]=cAzul3;
-    vetCasas[72]=cAzul4;
-    vetCasas[73]=cAzul5;
-    vetCasas[74]=casa14;
-    vetCasas[75]=cVerde2;
-    vetCasas[76]=cVerde3;
-    vetCasas[77]=cVerde4;
-    vetCasas[78]=cVerde5;
-    vetCasas[79]=casa2;
-    vetCasas[80]=cVerm2;
-    vetCasas[81]=cVerm3;
-    vetCasas[82]=cVerm4;
-    vetCasas[83]=cVerm5;
-    vetCasas[84]=cRosa6;
-    vetCasas[85]=cAzul6;
-    vetCasas[86]=cVerde6;
-    vetCasas[87]=cVerm6;
-  }
+  /*void jComboBoxDupla_actionPerformed(ActionEvent e) {
+    if(jComboBoxDupla.getSelectedIndex()==1){
+      jCheckBoxAzul.setEnabled(false);
+      jCheckBoxVerde.setEnabled(false);
+      jCheckBoxVermelho.setEnabled(false);
+      jCheckBoxAmarelo.setEnabled(false);
+      jCheckBoxAzul.setSelected(true);
+      jCheckBoxVerde.setSelected(true);
+      jCheckBoxVermelho.setSelected(true);
+      jCheckBoxRosa.setSelected(true);
+      jCheckBoxVerde.setText("Azul");
+      jCheckBoxRosa.setText("Vermelho");
+    }else{
+      jCheckBoxAzul.setEnabled(true);
+      jCheckBoxVerde.setEnabled(true);
+      jCheckBoxVermelho.setEnabled(true);
+      jCheckBoxRosa.setEnabled(true);
+      jCheckBoxAzul.setSelected(false);
+      jCheckBoxVerde.setSelected(false);
+      jCheckBoxVermelho.setSelected(false);
+      jCheckBoxRosa.setSelected(false);
+      jCheckBoxVerde.setText("Verde");
+      jCheckBoxAmarelo.setText("Rosa");
+    }
+  }*/
 
   void jButtonOk_actionPerformed(ActionEvent e) {
+    //testa se tem pelo menos 2 jogadores!!
     int cont=0;
     if(jCheckBoxRosa.isSelected())
       cont++;
@@ -798,18 +828,17 @@ public class Tabuleiro extends JFrame{
     if(jCheckBoxAzul.isSelected())
       cont++;
     if(cont>=2){
-      try{
-       for (int i = 0; i < vetCasas.length-4; i++) {
-         vetCasas[i].removeMouseListener(actFocus);
-         vetCasas[i].removeMouseListener(actClick);
-       }
-     }catch(Exception ex){
-     }
-     jogo = new Ludo(); //cria o objeto de jogo!!!! e inicia!!!
-     for (int i = 0; i < vetCasas.length; i++) {
-       vetCasas[i].resetaCasa();
-     }
-     int x = 0;
+      jTextPaneHistorico.setText(" Novo Jogo Iniciado\n ------------------------------------------------------------");
+      for (int i = 0; i < vetCasas.length; i++) {
+        try{ //remome todos os MouseListener e os peoas das casas( para caso o jogador jah tivesse iniciado um jogo antes)
+          vetCasas[i].removeMouseListener(actFocus);
+          vetCasas[i].removeMouseListener(actClick);
+          vetCasas[i].resetaCasa();
+        }catch(Exception ex){
+        }
+      }
+     jogo = new Jogo(); //cria o objeto de jogo!!!!p/ poder iniciar!
+     int x = 0;//testa quantos peoes deve criar!
      switch (jComboBoxQuant.getSelectedIndex()) {
        case 0:
          x = 4;
@@ -824,18 +853,50 @@ public class Tabuleiro extends JFrame{
          x = 1;
          break;
      }
+   //testa quantos jogadores deve criar!
      if (jCheckBoxRosa.isSelected()) {
-       jogo.insereJogador(jCheckBoxRosa.getText(), jTextFieldRosa.getText(), x);
+       jogo.insereJogador(jCheckBoxRosa.getText(), jTextFieldRosa.getText(),
+                          jRadioButtonPcRosa.isSelected(), x);
+       jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+ jTextFieldRosa.getText()+" Com a Cor->"+jCheckBoxRosa.getText());
+       if(jRadioButtonPcRosa.isSelected()){
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Computador)");
+       }else{
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Usuario)");
+       }
      }
      if (jCheckBoxAzul.isSelected()) {
-       jogo.insereJogador(jCheckBoxAzul.getText(), jTextFieldAzul.getText(), x);
+       jogo.insereJogador(jCheckBoxAzul.getText(), jTextFieldAzul.getText(),
+                          jRadioButtonPcAzul.isSelected(), x);
+       jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+ jTextFieldAzul.getText()+" Com a Cor->"+jCheckBoxAzul.getText());
+       if(jRadioButtonPcAzul.isSelected()){
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Computador)");
+       }else{
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Usuario)");
+       }
+
      }
      if (jCheckBoxVerde.isSelected()) {
-       jogo.insereJogador(jCheckBoxVerde.getText(), jTextFieldVerde.getText(), x);
+       jogo.insereJogador(jCheckBoxVerde.getText(), jTextFieldVerde.getText(),
+                          jRadioButtonPcVerde.isSelected(), x);
+       jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+ jTextFieldVerde.getText()+" Com a Cor->"+jCheckBoxVerde.getText());
+       if(jRadioButtonPcVerde.isSelected()){
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Computador)");
+       }else{
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Usuario)");
+       }
+
      }
      if (jCheckBoxVermelho.isSelected()) {
-       jogo.insereJogador(jCheckBoxVermelho.getText(), jTextFieldVermelho.getText(), x);
+       jogo.insereJogador(jCheckBoxVermelho.getText(),jTextFieldVermelho.getText(),
+                          jRadioButtonPcVermelho.isSelected(), x);
+       jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+ jTextFieldVermelho.getText()+" Com a Cor->"+jCheckBoxVermelho.getText());
+       if(jRadioButtonPcVermelho.isSelected()){
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Computador)");
+       }else{
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Usuario)");
+       }
      }
+     jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ------------------------------------------------------------");
      ArrayList peoes = jogo.iniciaJogo();
      //pinta os peaoes nas bases
      for (int i = 0; i < peoes.size(); i++) {
@@ -843,68 +904,66 @@ public class Tabuleiro extends JFrame{
        vetCasas[jogo.getBase(aux)].addPeao(aux);
      }
      formLudo.hide();
-     jButtonJogar.setEnabled(true);
+     jButtonJogar.setVisible(true);
+     jButtonJogar.setEnabled(true);//libera para rolar o dado!
+     jLabelDado.setVisible(false);
      this.alteraTextFieldJogador(jogo.getJogadorAtual());
+     if(jogo.getJogadorAtual() instanceof Computador){
+         Computador jog=(Computador)jogo.getJogadorAtual();
+         this.jogadaPc(jog);
+     }
    }else{
-     JOptionPane.showMessageDialog(null,"Adicione 2 ou mais Jogadores","ERRO",JOptionPane.ERROR_MESSAGE);
+     JOptionPane.showMessageDialog(null,"O Ludo exige um minimo de 2 Jogadores","ERRO",JOptionPane.ERROR_MESSAGE);
    }
   }
 
-  void jButtonCancelar_actionPerformed(ActionEvent e) {
+  void jButtonCancelar_actionPerformed(ActionEvent e) {//botao cancelar do formulario para criar jogo
     formLudo.hide();
   }
 
-  void jButtonJogar_actionPerformed(ActionEvent e) {
-   jogo.rolaDado();//muda face do dado
-   if(jogo.getNSorteado()==1)
-    jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado1.gif")));
-    if(jogo.getNSorteado()==2)
-        jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado2.gif")));
-     if(jogo.getNSorteado()==3)
-        jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado3.gif")));
-      if(jogo.getNSorteado()==4)
-         jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado4.gif")));
-        if (jogo.getNSorteado()==5)
-           jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado5.gif")));
-          if(jogo.getNSorteado()==6)
-             jLabel1.setIcon(new ImageIcon(Tabuleiro.class.getResource("Dado6.gif")));
-
-
-    jButtonJogar.setEnabled(false);
-    jogo.getJogadorAtual().decChance();
-    for(int i=0; i<vetCasas.length-4; i++){
-      if((i!=64)&&(i!=69)&&(i!=74)&&(i!=79))
-        vetCasas[i].addMouseListener(actFocus);
-    }
+  void jButtonJogar_actionPerformed(ActionEvent e) {//rolar o dado!
+      jogo.rolaDado();
+      this.alteraDado();
+      Jogador j_at = jogo.getJogadorAtual();
+      if ( (j_at.getQtEmJogo()==0) && (jogo.getDadoFace() != 6)) {
+        jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+ j_at.getNome()+" Nao Pode Mover Nenhuma Peao");
+        //tocar som q n pode mover beeee
+        //if(!(jogo.getJogadorAtual() instanceof Computador))
+          //tocaSoms.playAudioNJoga();
+        //JOptionPane.showMessageDialog(null, "Nenhum Peao pode ser Movido",
+                                      //"<<<:PP>>>", JOptionPane.ERROR_MESSAGE);
+        jogo.passaTurno();
+        jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ---" );
+        this.alteraTextFieldJogador(jogo.getJogadorAtual());
+        jLabelDado.setVisible(false);
+        jButtonJogar.setVisible(true);
+        jButtonJogar.setEnabled(true);
+        if(jogo.getJogadorAtual() instanceof Computador){
+          Computador jog=(Computador)jogo.getJogadorAtual();
+          this.jogadaPc(jog);
+        }
+      }else{
+        jButtonJogar.setEnabled(false);//blokeia para nao jogar o dado d novo!
+        for(int i=0; i<vetCasas.length-4; i++){ //adiciona os metodos de Focus-> MouseEntered e MouseExited,
+          if((i!=64)&&(i!=69)&&(i!=74)&&(i!=79)) //menos na casa final de cada cor!
+            vetCasas[i].addMouseListener(actFocus);
+        }
+      }
   }
 
   void casa_mouseEntered(MouseEvent e) {
     Casa cSource = (Casa)e.getSource();
-    if(jogo.getJogadorAtual().getCor().equals(cSource.getCorPeao())){
-      for(int i=0; i<vetCasas.length-4; i++){
-        if (vetCasas[i].equals(cSource)){
-          if ((i>47)&&(i<64)){
-            if(jogo.testeJogadaBase(vetCasas,cSource)){
-              cSource.addMouseListener(actClick);
-              cSource.setCursor(hand);
-            } else {
-              jButtonPassar.setEnabled(true);
-            }
-          } else {
-            if((i!=64)&&(i!=69)&&(i!=74)&&(i!=79)){
-              if(jogo.testeJogada(vetCasas,i)){
-                cSource.addMouseListener(actClick);
-                cSource.setCursor(hand);
-              }
-            }
-          }
-        }
-      }
+    //testa se nessa casa tem algum peao q ele pode mover!
+    if(cSource.temPeaoLivre(jogo.getJogadorAtual().getCor(),jogo.getDadoFace())){
+      //muda ponteiro do mouse e ativa o metodo de MouseClicked
+      cSource.addMouseListener(actClick);
+      cSource.setCursor(hand);
     }
   }
 
   void casa_mouseExited(MouseEvent e) {
     Casa cSource = (Casa)e.getSource();
+    //mudar de volta o ponteiro e retira o metodo de MouseClicked
     cSource.setCursor(seta);
     try{
       cSource.removeMouseListener(actClick);
@@ -913,48 +972,112 @@ public class Tabuleiro extends JFrame{
   }
 
   void casa_mouseClicked(MouseEvent e) {
-    Casa cSource = (Casa)e.getSource();
-    jButtonJogar.setEnabled(true);
-    jButtonPassar.setEnabled(false);
+     Casa cSource = (Casa)e.getSource();
+     cSource.removeMouseListener(actClick);
+     Peao p=cSource.tiraPeao(jogo.getJogadorAtual());//retira o peao do lugarq  ele ta!!
+     ArrayList aux=vetCasas[jogo.andaPeao(p,vetCasas)].addPeao(p);//coloca ele na nova casa!
+     if(aux.size()>0)
+       //if(!(jogo.getJogadorAtual() instanceof Computador))
+         //tocaSoms.playAudioVoltaBase();
+      //tocar som q volto alguem pra base
+     if(aux!=null){
+       for (int i = 0; i < aux.size(); i++) {  //manda pra base os q estavam na ksa nova!
+         p = (Peao) aux.get(i);
+         vetCasas[jogo.mandaBase(p)].addPeao(p);
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+jogo.getJogadorAtual().getNome()+" Mandou um Peao "+p.getCor()+" Pra Base");
+       }
+     }
+     try{
+        for (int i = 0; i < vetCasas.length; i++) {
+          vetCasas[i].removeMouseListener(actFocus);  //remove os MouseListener
+          vetCasas[i].removeMouseListener(actClick);  //(para obrigar o jogador a rolar o dado de novo)
+        }
+      }catch(Exception ex){
+      }
+     //testar se o cara ganhou!!
+     if(!jogo.testaAcabou()){
+       //passa a vez pro proximo jogador e libera para ele rolar o dado!
+       if(jogo.getDadoFace()!=6){
+         jogo.passaTurno();
+         jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ---" );
+       }else{
+         //tocar som q joga d novo
+         //if(!(jogo.getJogadorAtual() instanceof Computador))
+          // tocaSoms.playAudioJogaDNovo();
+        }
+        this.alteraTextFieldJogador(jogo.getJogadorAtual());
+        jLabelDado.setVisible(false);
+        jButtonJogar.setVisible(true);
+        jButtonJogar.setEnabled(true);
+        cSource.setCursor(seta);
+        if(jogo.getJogadorAtual() instanceof Computador){
+          Computador jog=(Computador)jogo.getJogadorAtual();
+          this.jogadaPc(jog);
+        }
+      }else{
+        //tocar som de q acabou
+        // tocaSoms.playAudioFim();
+        jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ------------------------------------------------------------\n Fim de Jogo:->"
+                                   +jTextFieldJogador.getText()+" È o Vencedor!!!");
+        JOptionPane.showMessageDialog(null, "O "+jTextFieldJogador.getText()+" È o Vencedor",
+                                      "Fim de Jogo", JOptionPane.ERROR_MESSAGE);
+      }
+  }
+
+  void casa_mouseClicked(Casa cSource) {
     cSource.removeMouseListener(actClick);
-    cSource.setCursor(seta);
-    Peao p=cSource.tiraPeao();
-    int casaDestino=jogo.andaPeao(p);
-    ArrayList aux=vetCasas[casaDestino].addPeao(p);
+    Peao p=cSource.tiraPeao(jogo.getJogadorAtual());//retira o peao do lugarq  ele ta!!
+    ArrayList aux=vetCasas[jogo.andaPeao(p,vetCasas)].addPeao(p);//coloca ele na nova casa!
+    if(aux.size()>0)
+      //if(!(jogo.getJogadorAtual() instanceof Computador))
+        //tocaSoms.playAudioVoltaBase();
+      //tocar som q volto alguem pra base
     if(aux!=null){
-      for (int i = 0; i < aux.size(); i++) {
+      for (int i = 0; i < aux.size(); i++) {  //manda pra base os q estavam na ksa nova!
         p = (Peao) aux.get(i);
+        jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+jogo.getJogadorAtual().getNome()+" Mandou um Peao "+p.getCor()+" Pra Base");
         vetCasas[jogo.mandaBase(p)].addPeao(p);
       }
     }
     try{
-      for (int i = 0; i < vetCasas.length-4; i++) {
-        vetCasas[i].removeMouseListener(actFocus);
-        vetCasas[i].removeMouseListener(actClick);
+       for (int i = 0; i < vetCasas.length; i++) {
+         vetCasas[i].removeMouseListener(actFocus);  //remove os MouseListener
+         vetCasas[i].removeMouseListener(actClick);  //(para obrigar o jogador a rolar o dado de novo)
+       }
+     }catch(Exception ex){
+     }
+    //testar se o cara ganhou!!
+    if(!jogo.testaAcabou()){
+    //passa a vez pro proximo jogador e libera para ele rolar o dado!
+      if(jogo.getDadoFace()!=6){
+        jogo.passaTurno();
+        jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ---" );
+      }else{
+        //tocar som q joga d novo
+        //if(!(jogo.getJogadorAtual() instanceof Computador))
+          //tocaSoms.playAudioJogaDNovo();
       }
-    }catch(Exception ex){
+      this.alteraTextFieldJogador(jogo.getJogadorAtual());
+      jLabelDado.setVisible(false);
+      jButtonJogar.setVisible(true);
+      jButtonJogar.setEnabled(true);
+      cSource.setCursor(seta);
+      if(jogo.getJogadorAtual() instanceof Computador){
+        Computador jog=(Computador)jogo.getJogadorAtual();
+        this.jogadaPc(jog);
+      }
+    }else{
+      //tocar som de que acabou
+        //tocaSoms.playAudioFim();
+      jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n ------------------------------------------------------------\n Fim de Jogo:->"
+                                +jTextFieldJogador.getText()+" È o Vencedor!!!");
+      JOptionPane.showMessageDialog(null, "O "+jTextFieldJogador.getText()+" È o Vencedor!!! HAHAHA O computador ganhouuu!!",
+                                      "Fim de Jogo", JOptionPane.ERROR_MESSAGE);
     }
-    int pos=0;
-    while(!(vetCasas[pos].equals(cSource))&&(pos<vetCasas.length)){
-      pos++;
-    }
-    if ((jogo.getNSorteado()==6)&&((pos<48)||(pos>63))){
-      jogo.getJogadorAtual().incChance();
-    }
-    jogo.testeDaCoroa(vetCasas,casaDestino,p);
-    String vencedor = jogo.testeVencedor();
-    if(vencedor.equals("")==false){
-      jButtonJogar.setEnabled(false);
-      JOptionPane.showMessageDialog(null, vencedor+" venceu!! Pagab√©ns meu camagada! =]");
-    }
-    if(jogo.getJogadorAtual().getChances()==0){
-      jogo.passaTurno();
-    }
-    this.alteraTextFieldJogador(jogo.getJogadorAtual());
   }
 
-  public void alteraTextFieldJogador(Jogador j){
-    jTextFieldJogador.setText(j.getNome());
+  private void alteraTextFieldJogador(Jogador j){ //metodo para alterar o textfield do jogador atual!
+    jTextFieldJogador.setText(" "+j.getNome());
     String cor=j.getCor();
     if(cor.equals("Vermelho")){
       jTextFieldJogador.setBackground(Color.red);
@@ -973,23 +1096,78 @@ public class Tabuleiro extends JFrame{
      }
    }
 
-  void jButtonPassar_actionPerformed(ActionEvent e) {
-    try{
-      for (int i = 0; i < vetCasas.length-4; i++) {
-        vetCasas[i].removeMouseListener(actFocus);
-        vetCasas[i].removeMouseListener(actClick);
+   public void alteraDado(){
+     jButtonJogar.setVisible(false);
+     jLabelDado.setVisible(true);
+     jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n "+jogo.getJogadorAtual().getNome()+" Tirou->"+jogo.getDadoFace());
+     if(jogo.getDadoFace()==6)
+       jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"(Portanto Ira Jogar novamente)");
+     switch(jogo.getDadoFace()){
+       case 1:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado1.png")));
+         break;
+       case 2:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado2.png")));
+         break;
+       case 3:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado3.png")));
+         break;
+       case 4:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado4.png")));
+         break;
+       case 5:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado5.png")));
+         break;
+       case 6:
+         jLabelDado.setIcon(new ImageIcon(Tabuleiro.class.getResource("/images/Dado6.png")));
+         break;
+     }
+     //if(!(jogo.getJogadorAtual() instanceof Computador))
+         //tocaSoms.playAudioJogaDNovo();
+   }
+   public void jogadaPc(Computador jog){
+    int i=0;
+    jTextPaneHistorico.setText(jTextPaneHistorico.getText()+"\n Computador Rolando o Dado:");
+    ActionEvent e=new ActionEvent(jButtonJogar,0,"");
+   // try {
+      //Thread.sleep(10);
+   // }
+   // catch (InterruptedException ex1) {
+   // }
+    jButtonJogar_actionPerformed(e);
+    if(jogo.getJogadorAtual().equals(jog)){
+      try{
+        Peao p = jog.fazJogada(jogo.getDadoFace());
+        i = jogo.getCasaAtual(p);
+        casa_mouseClicked(vetCasas[i]);
+      }catch(Exception ex){
+        //System.out.println("nenhuma jogada pode ser feita");
       }
-    }catch(Exception ex){
     }
-    jogo.passaTurno();
+   }
 
-    this.alteraTextFieldJogador(jogo.getJogadorAtual());
-    jButtonJogar.setEnabled(true);
-    jButtonPassar.setEnabled(false);
+  void jButtonHistorico_actionPerformed(ActionEvent e) {
+    if(jButtonHistorico.getText().equals("Mostrar Log")){
+      jButtonHistorico.setText("Ocultar Log");
+      jScrollPane1.setVisible(true);
+      this.setSize(850,490);
+    }else{
+      jButtonHistorico.setText("Mostrar Log");
+      jScrollPane1.setVisible(false);
+      this.setSize(555,490);
+    }
   }
+
+  void jLabelDado_mouseClicked(MouseEvent e) {
+    JOptionPane.showMessageDialog(null, "Clique em um Peao "+jogo.getJogadorAtual().getCor()+" Para andar!",
+                                      "Nananinan„o!", JOptionPane.ERROR_MESSAGE);
+  }
+
+
 
  }
 
+//classes internas dos action listener dos botoes!!
 class Tabuleiro_jButtonOk_actionAdapter implements java.awt.event.ActionListener {
   Tabuleiro adaptee;
 
@@ -1020,5 +1198,27 @@ class Tabuleiro_jButtonJogar_actionAdapter implements java.awt.event.ActionListe
   }
   public void actionPerformed(ActionEvent e) {
     adaptee.jButtonJogar_actionPerformed(e);
+  }
+}
+
+class Tabuleiro_jButtonHistorico_actionAdapter implements java.awt.event.ActionListener {
+  Tabuleiro adaptee;
+
+  Tabuleiro_jButtonHistorico_actionAdapter(Tabuleiro adaptee) {
+    this.adaptee = adaptee;
+  }
+  public void actionPerformed(ActionEvent e) {
+    adaptee.jButtonHistorico_actionPerformed(e);
+  }
+}
+
+class Tabuleiro_jLabelDado_mouseAdapter extends java.awt.event.MouseAdapter {
+  Tabuleiro adaptee;
+
+  Tabuleiro_jLabelDado_mouseAdapter(Tabuleiro adaptee) {
+    this.adaptee = adaptee;
+  }
+  public void mouseClicked(MouseEvent e) {
+    adaptee.jLabelDado_mouseClicked(e);
   }
 }
