@@ -16,8 +16,8 @@
 
 	<licenses>
 		<license>
-			<name>GNU General Public License, Version 3.0</name> <!-- TODO LGPL 2.1-->
-			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1</name>
+			<url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</url>
 			<comments>Copyright (c) 2011 Thiago Alvarenga Lechuga</comments>
 		</license>
 	</licenses>
@@ -108,6 +108,7 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>ISO-8859-1</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
